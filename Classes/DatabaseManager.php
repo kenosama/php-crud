@@ -22,14 +22,15 @@ class DatabaseManager
         $this->dbname = $dbname;
     }
 
-    public function connect()
+    public function connect(): PDO
     {
         // TODO: make the connection to the database
         try {
-            $this->connection=new PDO ("mysql:{$this->host};{$this->dbname}",$this->user, $this->password);
+            $this->connection=new PDO ("mysql:host={$this->host};dbname={$this->dbname}",$this->user, $this->password);
+            return $this->connection;
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die;
+            
+            die($e->getMessage());
         }
         
     }

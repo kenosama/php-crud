@@ -10,13 +10,35 @@
 
 <body>
 
-    <h1>Goodcard - track your collection of Pokémon cards</h1>
+    <h1>Goodcard - track your collection of MTG cards</h1>
 
-    <ul>
-        <?php foreach ($cards as $card) : ?>
-            <li><?= $card['name'] ?></li>
-        <?php endforeach; ?>
-    </ul>
+
+    <?php foreach ($cards as $card) : ?>
+        <div class="card">
+            <h2 class="card_name">
+                <?= $card["name"]; ?>
+            </h2>
+            <ul>
+                <li>Color: <?= $card["color"]; ?></li>
+                <li>Extention: <?= $card["extention"]; ?></li>
+                <li>Type: <?= $card["type"]; ?></li>
+                <li>Price: <?= $card["price"]; ?>€</li>
+                <li>Foil ?: <?php if ($card["foil"]===1){
+                    echo "yes";
+                }
+                else{
+                    echo"no";
+                } ?></li>
+
+            </ul>
+        </div>
+        <!-- <li><?php
+                    echo "<pre>";
+                    var_dump($card);
+                    echo "</pre";
+                    ?></li> -->
+    <?php endforeach; ?>
+
 
 </body>
 
