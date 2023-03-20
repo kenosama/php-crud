@@ -16,11 +16,21 @@ class DatabaseManager
     public function __construct(string $host, string $user, string $password, string $dbname)
     {
         // TODO: Set any user and password information
+        $this->user=$user;
+        $this->host = $host;
+        $this->password = $password;
+        $this->dbname = $dbname;
     }
 
     public function connect(): void
     {
         // TODO: make the connection to the database
-        $this->connection = null;
+        try {
+            $this->connection=new PDO ("mysql:{$this->host};{$this->dbname}",$this->user, $this->password);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die;
+        }
+        
     }
 }
