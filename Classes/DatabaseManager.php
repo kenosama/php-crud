@@ -22,7 +22,7 @@ class DatabaseManager
         $this->dbname = $dbname;
     }
 
-    public function connect(): void
+    public function connect()
     {
         // TODO: make the connection to the database
         try {

@@ -17,11 +17,13 @@ $databaseManager = new DatabaseManager($config['host'], $config['user'], $config
 
 $databaseManager->connect();
 
-// This example is about a Pokémon card collection
+// This example is about a MTG card collection
 // Update the naming if you'd like to work with another collection
 $cardRepository = new CardRepository($databaseManager);
 $cards = $cardRepository->get();
 
+echo"this is cards <br> <br>";
+var_dump($cards);
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
 $action = $_GET['action'] ?? null;
@@ -41,6 +43,7 @@ function overview()
 {
     // Load your view
     // Tip: you can load this dynamically and based on a variable, if you want to load another view
+    global $cards;
     require 'overview.php';
 }
 
