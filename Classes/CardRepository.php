@@ -13,8 +13,17 @@ class CardRepository
         $this->databaseManager = $databaseManager;
     }
 
-    public function create(): void
+    public function create($name, $color, $type, $price, $foil, $extention): void
     {
+        $query = "INSERT INTO cardsCollection (name, color, type, price, foil, extention) VALUES (:name, :color, :type, :price, :foil, :extention)";
+        $stmt = $this->databaseManager->connection->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':color', $color);
+        $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':foil', $foil);
+        $stmt->bindParam(':extention', $extention);
+        $stmt->execute();
     }
 
     // Get one
@@ -31,17 +40,7 @@ class CardRepository
         $cards = $getResult->fetchAll(PDO::FETCH_ASSOC);
 
         return $cards;
-        // TODO: Create an SQL query
-        // TODO: Use your database connection (see $databaseManager) and send your query to your database.
-        // TODO: fetch your data at the end of that action.
-        // TODO: replace dummy data by real one
-        // return [
-        //     ['name' => 'dummy one'],
-        //     ['name' => 'dummy two'],
-        // ];
-
-        // We get the database connection first, so we can apply our queries with it
-        // return $this->databaseManager->connection-> (runYourQueryHere)
+        
     }
 
     public function update(): void

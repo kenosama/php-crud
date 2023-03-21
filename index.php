@@ -3,10 +3,32 @@
 // Require the correct variable type to be used (no auto-converting)
 declare(strict_types=1);
 
+
 // Show errors so we get helpful information
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
+
+function whatIsHappening()
+{
+    echo '<h2>$_GET</h2>';
+    echo "<pre>";
+    var_dump($_GET);
+    echo "</pre>";
+    echo '<h2>$_POST</h2>';
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+    // echo '<h2>$_COOKIE</h2>';
+    //echo "<pre>";
+    // var_dump($_COOKIE);
+    //echo "</pre>";
+    // echo '<h2>$_SESSION</h2>';
+    //echo "<pre>";
+    // var_dump($_SESSION);
+    //echo "</pre>";
+}
+whatIsHappening();
 
 // Load you classes
 require_once 'config.php';
@@ -36,6 +58,9 @@ switch ($action) {
     case 'create':
         create();
         break;
+    case 'delete':
+        delete();
+        break;
     default:
         overview();
         break;
@@ -51,5 +76,23 @@ function overview()
 
 function create()
 {
-    // TODO: provide the create logic
+    global $cardRepository;
+    $cardName = isset($_GET["name"]) ? $_GET["name"] : null;
+    $cardColor= isset($_GET["color"]) ? $_GET["color"]:null;
+    $cardType = isset($_GET["type"]) ? $_GET["type"] : null;
+    $cardPrice = isset($_GET["price"]) ? $_GET["price"] : null;
+    $cardFoil = isset($_GET["foil"]) ? ($_GET["foil"] === "on" ? 1 : 0) : null;
+    $cardExtention = isset($_GET["extention"]) ? $_GET["extention"] : null;
+
+    $cardRepository->create($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtention);
+
+    header("Location: index.php");
+    exit();
+}
+
+function delete(){
+    global $cards;
+    global $cardRepository;
+
+
 }
