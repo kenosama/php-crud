@@ -93,6 +93,8 @@ function create()
 function delete(){
     global $cards;
     global $cardRepository;
-
-
+    $cardId= isset($_GET["Id"]) ? $_GET["Id"] : null;
+    $cardRepository->delete($cardId);
+    header("Location: index.php");
+    exit();
 }

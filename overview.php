@@ -43,14 +43,6 @@
             <input type="submit" value="Submit" class="border border-white bg-red-500 rounded p-3">
         </form>
     </div>
-    <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
-        <h1 class="text-xl mb-5">Delete a card</h1>
-        <form action="index.php" method="get">
-            <input type="hidden" name="action" value="create">
-            <label for="card">Select a card:</label>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
 
 
     <?php foreach ($cards as $card) : ?>

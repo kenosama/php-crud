@@ -47,7 +47,15 @@ class CardRepository
     {
     }
 
-    public function delete(): void
+    public function delete($cardID): void
     {
+        $query = "DELETE FROM `cardsCollection` WHERE `id` = :id";
+        $stmt = $this->databaseManager->connection->prepare($query);
+        // Bind the parameter value to the prepared statement
+        $stmt->bindParam(':id', $cardID);
+
+        // Execute the prepared statement
+        $stmt->execute();
+
     }
 }
