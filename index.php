@@ -16,7 +16,7 @@ function whatIsHappening()    // Function declaration to print variables
     var_dump($_GET);    // Prints the value of $_GET
     echo "</pre>";    // Prints "</pre>"
 }
-whatIsHappening();    // Calls function whatIsHappening()
+// whatIsHappening();    // Calls function whatIsHappening()
 
 // Load you classes
 require_once 'config.php';    // Require config.php file
