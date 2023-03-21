@@ -43,15 +43,7 @@ class CardRepository    // Declare class CardRepository
         return $cards;    // return cards
         
     }
-    public function getSpecifiedCard($id): array    // Declare function getSpecifiedCard
-    {
-        $query = "SELECT * FROM `cardsCollection` WHERE `id` = :id";    // Assign query to $query
-        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
-        $stmt->bindParam(':id', $id);    // Bind parameter :id to $id
-        $stmt->execute();    // Execute the statement
-        $card = $stmt->fetchAll(PDO::FETCH_ASSOC);    // Fetch all results in associative array
-        return $card;    // return card
-    }
+    
 
     public function getTypes(): array    // Declare function getSpecifiedCard
     {
@@ -60,6 +52,16 @@ class CardRepository    // Declare class CardRepository
         $stmt->execute();    // Execute the statement
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    // Fetch all results in associative array
         return $result;    // return result
+    }
+
+    public function getSpecifiedCard($id): array    // Declare function getSpecifiedCard
+    {
+        $query = "SELECT * FROM `cardsCollection` WHERE `id` = :id";    // Assign query to $query
+        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
+        $stmt->bindParam(':id', $id);    // Bind parameter :id to $id
+        $stmt->execute();    // Execute the statement
+        $card = $stmt->fetchAll(PDO::FETCH_ASSOC);    // Fetch all results in associative array
+        return $card;    // return card
     }
 
     public function update($name, $color, $type, $price, $foil, $extension, $id): void    // Declare function update
