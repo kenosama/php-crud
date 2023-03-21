@@ -32,9 +32,7 @@ $databaseManager->connect();    // Connect to database
 $cardRepository = new CardRepository($databaseManager);    // Initialize an object of CardRepository class
 $cards = $cardRepository->get();    // Gets cards from database
 $types = $cardRepository->getTypes();
-echo "<pre>";
-var_dump($types);
-echo "</pre>";
+
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
 $action = $_GET['action'] ?? null;    // Assign action to action variable, if action is empty, it will be null
@@ -51,6 +49,9 @@ switch ($action) {    // Switch case block
     case 'update':    // Case to update a card
         update();    // Call update() function
         break;    // Break the switch case block
+    case 'filter':
+        filter();
+        break;
     default:    // This is default case
         overview();    // Call overview() function
         break;    // Break the switch case block
@@ -103,5 +104,14 @@ function delete(){    // Function to delete a card
     $cardRepository->delete($cardId);    // Call delete() method of CardRepository class
     header("Location: ./");    // Redirects to the same page
     exit();    // Exits the script
+}
+
+function filter(){
+    global $cardRepository;
+    global $cards;
+    global $types;
+    $type = isset($_GET["type"]) ? $_GET["type"] : null;
+    $cards=$cardRepository->getSpecifiedType($type);
+    require 'overview.php';
 }
 

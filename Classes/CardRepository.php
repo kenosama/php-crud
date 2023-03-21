@@ -54,6 +54,16 @@ class CardRepository    // Declare class CardRepository
         return $result;    // return result
     }
 
+    public function getSpecifiedType($type): array    // Declare function getSpecifiedCard
+    {
+        $query = "SELECT * FROM `cardsCollection` WHERE `type` = :type";    // Assign query to $query
+        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
+        $stmt->bindParam(':type', $type);    // Bind parameter :id to $id
+        $stmt->execute();    // Execute the statement
+        $cardsWithType = $stmt->fetchAll(PDO::FETCH_ASSOC);    // Fetch all results in associative array
+        return $cardsWithType;    // return card
+    }
+
     public function getSpecifiedCard($id): array    // Declare function getSpecifiedCard
     {
         $query = "SELECT * FROM `cardsCollection` WHERE `id` = :id";    // Assign query to $query
