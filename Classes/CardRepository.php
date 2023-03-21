@@ -88,16 +88,13 @@ class CardRepository    // Declare class CardRepository
         $stmt->execute();
     }
 
-    public function delete($cardID): void    // Declare function delete
+    public function delete($cardID): void
     {
-        $query = "DELETE FROM `cardsCollection` WHERE `id` = :id";    // Assign query to $query
-        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
-        // Bind the parameter value to the prepared statement
-        $stmt->bindParam(':id', $cardID);    // Bind parameter :id to $cardID
-
-        // Execute the prepared statement
-        $stmt->execute();    // Execute the statement
-
+        $query = "UPDATE `cardsCollection` SET `deleted_at` = :deleted_at WHERE `id` = :id";
+        $stmt = $this->databaseManager->connection->prepare($query);
+        $stmt->bindValue(':deleted_at', date('Y-m-d H:i:s'));
+        $stmt->bindParam(':id', $cardID);
+        $stmt->execute();
     }
 }
 
