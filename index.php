@@ -58,6 +58,9 @@ switch ($action) {
     case 'delete':
         delete();
         break;
+    case 'update':
+        update();
+        break;
     default:
         overview();
         break;
@@ -82,6 +85,22 @@ function create()
     $cardExtention = isset($_GET["extention"]) ? $_GET["extention"] : null;
 
     $cardRepository->create($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtention);
+
+    header("Location: index.php");
+    exit();
+}
+
+function update(){
+    global $cardRepository;
+    $cardId = isset($_GET["id"]) ? $_GET["id"] : null;
+    $cardName = isset($_GET["name"]) ? $_GET["name"] : null;
+    $cardColor = isset($_GET["color"]) ? $_GET["color"] : null;
+    $cardType = isset($_GET["type"]) ? $_GET["type"] : null;
+    $cardPrice = isset($_GET["price"]) ? $_GET["price"] : null;
+    $cardFoil = isset($_GET["foil"]) ? ($_GET["foil"] === "on" ? 1 : 0) : null;
+    $cardExtention = isset($_GET["extention"]) ? $_GET["extention"] : null;
+
+    $cardRepository->update($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtention,$cardId);
 
     header("Location: index.php");
     exit();
