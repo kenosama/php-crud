@@ -17,16 +17,6 @@ function whatIsHappening()
     echo "</pre>";
     echo '<h2>$_POST</h2>';
     echo "<pre>";
-    var_dump($_POST);
-    echo "</pre>";
-    // echo '<h2>$_COOKIE</h2>';
-    //echo "<pre>";
-    // var_dump($_COOKIE);
-    //echo "</pre>";
-    // echo '<h2>$_SESSION</h2>';
-    //echo "<pre>";
-    // var_dump($_SESSION);
-    //echo "</pre>";
 }
 whatIsHappening();
 
