@@ -74,19 +74,21 @@ class CardRepository    // Declare class CardRepository
         return $card;    // return card
     }
 
-    public function update($name, $color, $type, $price, $foil, $extension, $id): void    // Declare function update
+    public function update($name, $color, $type, $price, $foil, $extension, $id): void
     {
-        $query = "UPDATE `cardsCollection` SET `name` = :name, `color` = :color, `type` = :type, `price` = :price, `foil` = :foil, `extension` = :extension WHERE `id` = :id";    // Assign query to $query
-        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
+        $query = "UPDATE `cardsCollection` SET `name` = :name, `color` = :color, `type` = :type, `price` = :price, `foil` = :foil, `extension` = :extension, `updated_at` = :updated_at WHERE `id` = :id";
+        $stmt = $this->databaseManager->connection->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':foil', $foil);
         $stmt->bindParam(':extension', $extension);
+        $stmt->bindValue(':updated_at', date('Y-m-d H:i:s'));
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+
 
     public function delete($cardID): void
     {
