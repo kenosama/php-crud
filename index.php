@@ -70,9 +70,9 @@ function create()
     $cardType = isset($_GET["type"]) ? $_GET["type"] : null;
     $cardPrice = isset($_GET["price"]) ? $_GET["price"] : null;
     $cardFoil = isset($_GET["foil"]) ? ($_GET["foil"] === "on" ? 1 : 0) : null;
-    $cardExtention = isset($_GET["extention"]) ? $_GET["extention"] : null;
+    $cardExtension = isset($_GET["extension"]) ? $_GET["extension"] : null;
 
-    $cardRepository->create($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtention);
+    $cardRepository->create($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtension);
 
     header("Location: index.php");
     exit();
@@ -86,9 +86,9 @@ function update(){
     $cardType = isset($_GET["type"]) ? $_GET["type"] : null;
     $cardPrice = isset($_GET["price"]) ? $_GET["price"] : null;
     $cardFoil = isset($_GET["foil"]) ? ($_GET["foil"] === "on" ? 1 : 0) : null;
-    $cardExtention = isset($_GET["extention"]) ? $_GET["extention"] : null;
+    $cardExtension = isset($_GET["extension"]) ? $_GET["extension"] : null;
 
-    $cardRepository->update($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtention,$cardId);
+    $cardRepository->update($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtension,$cardId);
 
     header("Location: index.php");
     exit();

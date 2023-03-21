@@ -79,7 +79,7 @@ echo "</pre>";
             <br>
 
             <label for="extention">Extension:</label>
-            <input type="text" name="extention" id="extention" class="mb-2 text-black px-2" value="<?= $card[0]["extention"] ?>">
+            <input type="text" name="extension" id="extension" class="mb-2 text-black px-2" value="<?= $card[0]["extension"] ?>">
             <br>
 
             <input type="submit" value="Submit" class="border border-white bg-red-500 rounded p-3">

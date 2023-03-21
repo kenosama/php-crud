@@ -13,16 +13,16 @@ class CardRepository
         $this->databaseManager = $databaseManager;
     }
 
-    public function create($name, $color, $type, $price, $foil, $extention): void
+    public function create($name, $color, $type, $price, $foil, $extension): void
     {
-        $query = "INSERT INTO cardsCollection (name, color, type, price, foil, extention) VALUES (:name, :color, :type, :price, :foil, :extention)";
+        $query = "INSERT INTO cardsCollection (name, color, type, price, foil, extension) VALUES (:name, :color, :type, :price, :foil, :extension)";
         $stmt = $this->databaseManager->connection->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':foil', $foil);
-        $stmt->bindParam(':extention', $extention);
+        $stmt->bindParam(':extension', $extension);
         $stmt->execute();
     }
 
@@ -52,16 +52,16 @@ class CardRepository
         return $card;
     }
 
-    public function update($name, $color, $type, $price, $foil, $extention, $id): void
+    public function update($name, $color, $type, $price, $foil, $extension, $id): void
     {
-        $query = "UPDATE `cardsCollection` SET `name` = :name, `color` = :color, `type` = :type, `price` = :price, `foil` = :foil, `extention` = :extention WHERE `id` = :id";
+        $query = "UPDATE `cardsCollection` SET `name` = :name, `color` = :color, `type` = :type, `price` = :price, `foil` = :foil, `extension` = :extension WHERE `id` = :id";
         $stmt = $this->databaseManager->connection->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':foil', $foil);
-        $stmt->bindParam(':extention', $extention);
+        $stmt->bindParam(':extension', $extension);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }

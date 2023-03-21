@@ -36,8 +36,8 @@
             <input type="checkbox" name="foil" id="foil">
             <br>
 
-            <label for="extention">Extension:</label>
-            <input type="text" name="extention" id="extention" class="mb-2 text-black px-2">
+            <label for="extension">Extension:</label>
+            <input type="text" name="extension" id="extension" class="mb-2 text-black px-2">
             <br>
 
             <input type="submit" value="Submit" class="border border-white bg-red-500 rounded p-3">
@@ -52,7 +52,7 @@
             </h2>
             <ul>
                 <li>Color: <?= $card["color"]; ?></li>
-                <li>Extention: <?= $card["extention"]; ?></li>
+                <li>Extention: <?= $card["extension"]; ?></li>
                 <li>Type: <?= $card["type"]; ?></li>
                 <li>Price: <?= $card["price"]; ?>€</li>
                 <li>Foil ?: <?php if ($card["foil"] === 1) {
