@@ -35,7 +35,7 @@ class CardRepository    // Declare class CardRepository
     // Get all
     public function get(): array    // Declare function get
     {
-        $query = "SELECT * FROM cardsCollection;";    // Assign query to $query
+        $query = "SELECT * FROM cardsCollection WHERE deleted_at IS NULL;";    // Assign query to $query
         // var_dump($this->databaseManager);
         $getResult = $this->databaseManager->connection->query($query);    // query and store result in $getResult
         $cards = $getResult->fetchAll(PDO::FETCH_ASSOC);    // fetch all results in associative array
@@ -56,7 +56,7 @@ class CardRepository    // Declare class CardRepository
 
     public function getSpecifiedType($type): array    // Declare function getSpecifiedCard
     {
-        $query = "SELECT * FROM `cardsCollection` WHERE `type` = :type";    // Assign query to $query
+        $query = "SELECT * FROM `cardsCollection` WHERE `type` = :type AND deleted_at IS NULL";    // Assign query to $query
         $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
         $stmt->bindParam(':type', $type);    // Bind parameter :id to $id
         $stmt->execute();    // Execute the statement

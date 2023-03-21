@@ -33,6 +33,9 @@ $cardRepository = new CardRepository($databaseManager);    // Initialize an obje
 $cards = $cardRepository->get();    // Gets cards from database
 $types = $cardRepository->getTypes();
 
+echo "<pre>";
+var_dump($cards);
+echo "</pre>";
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
 $action = $_GET['action'] ?? null;    // Assign action to action variable, if action is empty, it will be null
