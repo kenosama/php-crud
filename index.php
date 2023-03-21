@@ -15,8 +15,6 @@ function whatIsHappening()
     echo "<pre>";
     var_dump($_GET);
     echo "</pre>";
-    echo '<h2>$_POST</h2>';
-    echo "<pre>";
 }
 whatIsHappening();
 
