@@ -44,10 +44,7 @@ $databaseManager->connect();
 $cardRepository = new CardRepository($databaseManager);
 $cards = $cardRepository->get();
 
-echo"this is cards <br> <br>";
-echo "<pre>";
-var_dump($cards);
-echo"</pre>";
+
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
 $action = $_GET['action'] ?? null;
