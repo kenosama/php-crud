@@ -62,15 +62,16 @@
                             } ?></li>
 
             </ul>
-            <form method="get" action="index.php">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="Id" value="<?= $card["id"] ?>">
-                <input type="submit" value="Delete this card" class="border border-white bg-red-500 rounded p-3 mt-4">
-            </form>
-            <form method="get" action="edit.php">
-                <input type="hidden" name="Id" value="<?= $card["id"] ?>">
-                <input type="submit" value="Edit This card" class="border border-white bg-green-400 rounded p-3 mt-4">
-            </form>
+            <a href="index.php?action=delete&Id=<?= $card["id"] ?>">
+                <button class="bg-red-500 border hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full mt-2">
+                    Delete <?= $card['name'] ?>
+                </button>
+            </a>
+            <a href="edit.php?Id=<?= $card["id"] ?>">
+                <button class="bg-green-500 border hover:bg-green-700 text-white font-bold py-1 px-2 rounded-full mt-2">
+                    Edit <?= $card['name'] ?>
+                </button>
+            </a>
         </div>
     <?php endforeach; ?>
 

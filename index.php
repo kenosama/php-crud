@@ -74,7 +74,7 @@ function create()
 
     $cardRepository->create($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtension);
 
-    header("Location: index.php");
+    header("Location: ./");
     exit();
 }
 
@@ -90,7 +90,7 @@ function update(){
 
     $cardRepository->update($cardName, $cardColor, $cardType, $cardPrice, $cardFoil, $cardExtension,$cardId);
 
-    header("Location: index.php");
+    header("Location: ./");
     exit();
 }
 
@@ -98,6 +98,6 @@ function delete(){
     global $cardRepository;
     $cardId= isset($_GET["Id"]) ? $_GET["Id"] : null;
     $cardRepository->delete($cardId);
-    header("Location: index.php");
+    header("Location: ./");
     exit();
 }
