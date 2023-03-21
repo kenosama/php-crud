@@ -31,8 +31,10 @@ $databaseManager->connect();    // Connect to database
 // Update the naming if you'd like to work with another collection
 $cardRepository = new CardRepository($databaseManager);    // Initialize an object of CardRepository class
 $cards = $cardRepository->get();    // Gets cards from database
-
-
+$types = $cardRepository->getTypes();
+echo "<pre>";
+var_dump($types);
+echo "</pre>";
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
 $action = $_GET['action'] ?? null;    // Assign action to action variable, if action is empty, it will be null
@@ -58,7 +60,8 @@ function overview()    // Function to display the overview of the cards
 {
     // Load your view
     // Tip: you can load this dynamically and based on a variable, if you want to load another view
-    global $cards;    // Global variable to get all cards
+    global $cards;
+    global $types;    // Global variable to get all cards
     require 'overview.php';    // Require overview.php file
 }
 

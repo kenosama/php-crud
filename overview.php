@@ -44,6 +44,31 @@
         </form>
     </div>
 
+    <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
+        <h1 class="text-xl mb-5">Filter by types</h1>
+        <?php
+        $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink','orange'];
+        $colorIndex = 0;
+        foreach ($types as $type) : ?>
+            <a href="index.php?action=filter&type=<?= $type["type"] ?>">
+                <button class="bg-<?= $colors[$colorIndex] ?>-500 border hover:bg-<?= $colors[$colorIndex] ?>-700 text-white font-bold py-1 px-2 rounded-full mt-2">
+                    <?= $type['type'] ?>
+                </button>
+            </a>
+            <?php
+            $colorIndex++;
+            if ($colorIndex >= count($colors)) {
+                $colorIndex = 0;
+            }
+            ?>
+        <?php endforeach; ?>
+        <a href="./">
+            <button class="bg-red-500 border hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full mt-2">
+                Back to basic page
+            </button>
+        </a>
+    </div>
+
 
     <?php foreach ($cards as $card) : ?>
         <div class="border border-white rounded-2xl bg-slate-800 mb-5 p-7 mx-5">

@@ -53,6 +53,15 @@ class CardRepository    // Declare class CardRepository
         return $card;    // return card
     }
 
+    public function getTypes(): array    // Declare function getSpecifiedCard
+    {
+        $query = "SELECT DISTINCT `type` FROM `cardsCollection`;";    // Assign query to $query
+        $stmt = $this->databaseManager->connection->prepare($query);    // Prepare statement
+        $stmt->execute();    // Execute the statement
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    // Fetch all results in associative array
+        return $result;    // return result
+    }
+
     public function update($name, $color, $type, $price, $foil, $extension, $id): void    // Declare function update
     {
         $query = "UPDATE `cardsCollection` SET `name` = :name, `color` = :color, `type` = :type, `price` = :price, `foil` = :foil, `extension` = :extension WHERE `id` = :id";    // Assign query to $query
