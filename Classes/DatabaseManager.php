@@ -1,5 +1,5 @@
 <?php
-
+//This is a php file
 // This class will manage the connection to the database
 // It will be passed on the other classes who need it
 class DatabaseManager
