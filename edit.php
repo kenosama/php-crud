@@ -15,7 +15,7 @@ function whatIsHappening()
     var_dump($_GET);
     echo "</pre>";
 }
-whatIsHappening();
+// whatIsHappening();
 
 // Load you classes
 require_once 'config.php';

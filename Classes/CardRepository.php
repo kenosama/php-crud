@@ -27,12 +27,6 @@ class CardRepository    // Declare class CardRepository
         $stmt->execute();
     }
 
-    // Get one
-    public function find()    // Declare function find
-    {
-    }
-
-    // Get all
     public function get(): array    // Declare function get
     {
         $query = "SELECT * FROM cardsCollection WHERE deleted_at IS NULL;";    // Assign query to $query

@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class=" bg-neutral-800 text-white">
+<body class=" dark:bg-neutral-800 bg-slate-200 dark:text-white text-black">
 
     <h1 class="text-2xl underline mb-4 ">Goodcard - track your collection of MTG cards</h1>
 
@@ -47,6 +47,9 @@
     <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
         <h1 class="text-xl mb-5">Filter by types</h1>
         <?php
+
+use function PHPSTORM_META\type;
+
         $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink','orange'];
         $colorIndex = 0;
         foreach ($types as $type) : ?>
@@ -69,9 +72,16 @@
         </a>
     </div>
 
+<?php if (isset($_GET['action']) && $_GET['action'] === 'filter') {
+    $filter=$_GET['type'];
+    echo "
+        <div class='border bg-red-500 text-white font-bold p-3 rounded mx-2 mb-7'>
+            Active Filter: {$filter}
+        </div>";
+} ?>
 
     <?php foreach ($cards as $card) : ?>
-        <div class="border border-white rounded-2xl bg-slate-800 mb-5 p-7 mx-5">
+        <article class="border border-white rounded-2xl bg-slate-800 mb-5 p-7 mx-5">
             <h2 class="text-xl underline underline-offset-4 mb-2">
                 <?= $card["name"]; ?>
             </h2>
@@ -97,7 +107,7 @@
                     Edit <?= $card['name'] ?>
                 </button>
             </a>
-        </div>
+        </article>
     <?php endforeach; ?>
 
 
