@@ -1,106 +1,87 @@
 <?php
+declare(strict_types=1);    // Use strict type checking
 
-// Require the correct variable type to be used (no auto-converting)    // Strict type check for data types
-declare(strict_types=1);    // Strict type check for data types
+ini_set('display_errors', '1');    // Display errors
+ini_set('display_startup_errors', '1');    // Display startup errors
+error_reporting(E_ALL);    // error reporting
 
+require_once 'config.php';    // Include config file
+require_once 'classes/DatabaseManager.php';    // Include DatabaseManager file
+require_once 'classes/CardRepository.php';    // Include CardRepository file
 
-// Show errors so we get helpful information
-ini_set('display_errors', '1');    // Enable error reporting by setting display_errors to 1
-ini_set('display_startup_errors', '1');    // Enable error reporting by setting display_startup_errors to 1
-error_reporting(E_ALL);    // Enable error reporting by setting error_reporting to E_ALL
-  // Calls function whatIsHappening()
-
-// Load you classes
-require_once 'config.php';    // Require config.php file
-require_once 'classes/DatabaseManager.php';    // Require DatabaseManager.php file
-require_once 'classes/CardRepository.php';    // Require CardRepository.php file
-
-$databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);    // Initialize an object of DatabaseManager class
+$databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);    // Create databaseManager object
 
 $databaseManager->connect();    // Connect to database
+$cardRepository = new CardRepository($databaseManager);    // Create CardRepository object
 
-// This example is about a MTG card collection
-// Update the naming if you'd like to work with another collection
-$cardRepository = new CardRepository($databaseManager);    // Initialize an object of CardRepository class
+$action = $_GET['action'] ?? null;    // Get action from the request
 
-// Get the current action to execute
-// If nothing is specified, it will remain empty (home should be loaded)
-$action = $_GET['action'] ?? null;    // Assign action to action variable, if action is empty, it will be null
-
-// Load the relevant action
-// This system will help you to only execute the code you want, instead of all of it (or complex if statements)
-switch ($action) {    // Switch case block
-    case 'create':    // Case to create a card
-        create();    // Call create() function
-        break;    // Break the switch case block
-    case 'delete':    // Case to delete a card
-        delete();    // Call delete() function
-        break;    // Break the switch case block
-    case 'update':    // Case to update a card
-        update();    // Call update() function
-        break;
-    case 'updated':    // Case to update a card
-        update();    // Call update() function
-        break;// Break the switch case block
-    case 'filter':
-        filter();
-        break;
-    default:    // This is default case
-        overview();    // Call overview() function
-        break;    // Break the switch case block
+switch ($action) {    // Switch statement
+    case 'create':    // case create
+        create();    // call create function
+        break;    // break statement
+    case 'delete':    // case delete
+        delete();    // call delete function
+        break;    // break statement
+    case 'update':    // case update
+        update();    // call update function
+        break;    // break statement
+    case 'updated':    // case updated
+        update();    // call update function
+        break;    // break statement
+    case 'filter':    // case filter
+        filter();    // call filter function
+        break;    // break statement
+    default:    // default body
+        overview();    // call overview function
+        break;    // break statement
 }
 
-function overview()    // Function to display the overview of the cards
+function overview()    // overview function
 {
-    // Load your view
-    // Tip: you can load this dynamically and based on a variable, if you want to load another view
-    // Global variable to get all cards
-    global $cardRepository;
-    $cards = $cardRepository->get();    // Gets cards from database
-    $types = $cardRepository->getTypes();
-    $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink', 'orange'];
-    $colorIndex = 0;
-    require 'overview.php';    // Require overview.php file
+    global $cardRepository;    // use cardRepository variable globally
+    $cards = $cardRepository->get();    // Get all cards from database
+    $types = $cardRepository->getTypes();    // Get all types from database
+    $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink', 'orange'];    // initialize colors array
+    $colorIndex = 0;    // initialize colorIndex variable
+    require 'overview.php';    // include overview.php file
 }
 
-function create()    // Function to create a card
+function create()    // create function
 {
-    global $cardRepository;    // Global variable to access object of CardRepository class
-    // Assign extension of the card to $cardExtension
-    $cardRepository->create();    // Call create() method of CardRepository class
-    header("Location: ./");    // Redirects to the same page
-    exit();    // Exits the script
+    global $cardRepository;    // use cardRepository variable globally
+    $cardRepository->create();    // call create function of cardRepository
+    header("Location: ./");    // Redirect to home page
+    exit();    // exit statement
 }
 
-function update(){
-    global $cardRepository;
-    if($_GET["action"] === "update"){
-        $card = $cardRepository->getSpecifiedCard($_GET["Id"]);
-        require'edit.php';
-    }elseif ($_GET["action"] === "updated") {
-        // Function to update a card
-        global $cardRepository;    // Global variable to access the object of CardRepository class
-        $cardRepository->update();    // Call update() method of CardRepository class
-        header("Location: ./");    // Redirects to the same page
-        exit();// Exits the script
-    }    
+function update(){    // update function
+    global $cardRepository;    // use cardRepository variable globally
+    if($_GET["action"] === "update"){    // check if action is update
+        $card = $cardRepository->getSpecifiedCard($_GET["Id"]);    // Get card from database
+        require'edit.php';    // include edit.php file
+    }elseif ($_GET["action"] === "updated") {    // check if action is updated
+        global $cardRepository;    // use cardRepository variable globally
+        $cardRepository->update();    // call update function of cardRepository
+        header("Location: ./");    // Redirect to home page
+        exit();    // exit statement
+    }
 }
 
-function delete(){    // Function to delete a card
-    global $cardRepository;    // Global variable to access the object of CardRepository class
-    $cardId= isset($_GET["Id"]) ? $_GET["Id"] : null;    // Assign id of the card to $cardId
-    $cardRepository->delete($cardId);    // Call delete() method of CardRepository class
-    header("Location: ./");    // Redirects to the same page
-    exit();    // Exits the script
+function delete(){    // delete function
+    global $cardRepository;    // use cardRepository variable globally
+    $cardId= isset($_GET["Id"]) ? $_GET["Id"] : null;    // Get card id from request
+    $cardRepository->delete($cardId);    // call delete function of cardRepository
+    header("Location: ./");    // Redirect to home page
+    exit();    // exit statement
 }
 
-function filter(){
-    global $cardRepository;
-    $types = $cardRepository->getTypes(); 
-    $type = isset($_GET["type"]) ? $_GET["type"] : null;
-    $cards=$cardRepository->getSpecifiedType($type);
-    $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink', 'orange'];
-    $colorIndex = 0;
-    require 'overview.php';
+function filter(){    // filter function
+    global $cardRepository;    // use cardRepository variable globally
+    $types = $cardRepository->getTypes();    // Get all types from database
+    $type = isset($_GET["type"]) ? $_GET["type"] : null;    // Get type from request
+    $cards=$cardRepository->getSpecifiedType($type);    // Get all cards of specified type from database
+    $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink', 'orange'];    // initialize colors array
+    $colorIndex = 0;    // initialize colorIndex variable
+    require 'overview.php';    // include overview.php file
 }
-
