@@ -15,7 +15,7 @@
 
     <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
         <h1 class="text-xl mb-5">Create a card</h1>
-        <form method="get" action="index.php">
+        <form method="get" action="">
             <input type="hidden" name="action" value="create">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="mb-2 text-black px-2">
@@ -47,11 +47,6 @@
     <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
         <h1 class="text-xl mb-5">Filter by types</h1>
         <?php
-
-use function PHPSTORM_META\type;
-
-        $colors = ['emerald', 'blue', 'green', 'yellow', 'indigo', 'purple', 'pink','orange'];
-        $colorIndex = 0;
         foreach ($types as $type) : ?>
             <a href="index.php?action=filter&type=<?= $type["type"] ?>">
                 <button class="bg-<?= $colors[$colorIndex] ?>-500 border hover:bg-<?= $colors[$colorIndex] ?>-700 text-white font-bold py-1 px-2 rounded-full mt-2">
@@ -97,12 +92,12 @@ use function PHPSTORM_META\type;
                             } ?></li>
 
             </ul>
-            <a href="index.php?action=delete&Id=<?= $card["id"] ?>">
+            <a href="?action=delete&Id=<?= $card["id"] ?>">
                 <button class="bg-red-500 border hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full mt-2">
                     Delete <?= $card['name'] ?>
                 </button>
             </a>
-            <a href="edit.php?Id=<?= $card["id"] ?>">
+            <a href="?action=update&Id=<?= $card["id"] ?>">
                 <button class="bg-green-500 border hover:bg-green-700 text-white font-bold py-1 px-2 rounded-full mt-2">
                     Edit <?= $card['name'] ?>
                 </button>

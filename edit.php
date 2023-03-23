@@ -1,43 +1,4 @@
-<?php
 
-declare(strict_types=1);
-
-
-// Show errors so we get helpful information
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-function whatIsHappening()
-{
-    echo '<h2>$_GET</h2>';
-    echo "<pre>";
-    var_dump($_GET);
-    echo "</pre>";
-}
-// whatIsHappening();
-
-// Load you classes
-require_once 'config.php';
-require_once 'classes/DatabaseManager.php';
-require_once 'classes/CardRepository.php';
-
-$databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);
-
-$databaseManager->connect();
-
-// This example is about a MTG card collection
-// Update the naming if you'd like to work with another collection
-$cardRepository = new CardRepository($databaseManager);
-
-$card = $cardRepository->getSpecifiedCard($_GET["Id"]);
-
-echo "<pre>";
-var_dump($card);
-echo "</pre>";
-
-
-?>
 
 <!doctype html>
 <html lang="en">
@@ -56,7 +17,7 @@ echo "</pre>";
     <div class="border bg-slate-500 p-3 rounded mx-2 mb-7">
         <h1 class="text-xl mb-5">Update a card</h1>
         <form method="get" action="index.php">
-            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="action" value="updated">
             <input type="hidden" name="id" value="<?= $card[0]["id"] ?>">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="mb-2 text-black px-2" value="<?= $card[0]["name"] ?>">
